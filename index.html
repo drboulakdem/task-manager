@@ -9,69 +9,20 @@
             background-color: #121212;
             color: white;
             font-family: Arial, sans-serif;
-            margin: 20px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .task {
+            padding: 10px;
+            border-bottom: 1px solid gray;
         }
-        th, td {
-            border: 1px solid gray;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #1E1E1E;
+        .not-working {
+            opacity: 0.5;
         }
     </style>
 </head>
 <body>
     <h1>Task Manager</h1>
-    <table id="tasksTable">
-        <thead>
-            <tr>
-                <th>Task Name</th>
-                <th>Task Link</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Tasks will be inserted here -->
-        </tbody>
-    </table>
+    <div id="taskList"></div>
 
-    <script>
-        async function loadTasks() {
-            try {
-                const response = await fetch('tasks.json');
-                const tasks = await response.json();
-                const tbody = document.getElementById('tasksTable').getElementsByTagName('tbody')[0];
-                tbody.innerHTML = ''; // Clear the table
-
-                tasks.forEach(task => {
-                    const row = document.createElement('tr');
-                    const nameCell = document.createElement('td');
-                    nameCell.textContent = task.TaskName;
-                    const linkCell = document.createElement('td');
-                    const link = document.createElement('a');
-                    link.href = task.TaskLink;
-                    link.textContent = task.TaskLink;
-                    link.target = '_blank';
-                    linkCell.appendChild(link);
-                    const statusCell = document.createElement('td');
-                    statusCell.textContent = task.IsNotWorking ? 'Not Working' : 'Working';
-                    row.appendChild(nameCell);
-                    row.appendChild(linkCell);
-                    row.appendChild(statusCell);
-                    tbody.appendChild(row);
-                });
-            } catch (error) {
-                console.error('Failed to load tasks:', error);
-            }
-        }
-
-        // Load tasks when the page is loaded
-        window.onload = loadTasks;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
